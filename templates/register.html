@@ -1,0 +1,86 @@
+{% from "bootstrap5/form.html" import render_form %} {% block content %} {%
+include "header.html" %}
+
+<!-- Page Header -->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/register-bg.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>Register</h1>
+          <span class="subheading">Start Contributing to the Blog!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <!--TODO: render your registration form here-->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+              <div class="form-group">
+                {{ form.username.label(class='form-control-label') }}
+                {% if form.username.errors %}
+                  {{ form.username(class='form-control form-control-lg is-invalid') }}
+                    <div class="invalid-feedback">
+                      {% for error in form.username.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                {% else %}
+                  {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.email.label(class='form-control-label') }}
+                {% if form.email.errors %}
+                  {{ form.email(class='form-control form-control-lg is-invalid') }}
+                    <div class="invalid-feedback">
+                      {% for error in form.email.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                {% else %}
+                  {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.password.label(class='form-control-label') }}
+                {% if form.password.errors %}
+                  {{ form.password(class='form-control form-control-lg is-invalid') }}
+                    <div class="invalid-feedback">
+                      {% for error in form.password.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                {% else %}
+                  {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+              {% if message %}
+                <div class="form-group">
+                  <p>{{ message }}</p>
+                </div>
+              {% endif %}
+              <hr>
+              <div class="form-group">
+                {{ form.submit(class='btn btn-outline-info') }}
+              </div>
+        </form>
+        <div class="border-top pt-3">
+          <small class="text-muted">
+            Already a hoe? <a class="ml-2" href="{{ url_for('login') }}">Log in</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %} {% endblock %}
